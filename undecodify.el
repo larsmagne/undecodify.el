@@ -58,11 +58,8 @@
   (with-temp-buffer
     (set-buffer-multibyte nil)
     (cl-loop for char across string
-	     for trans = (and (> char 255)
-			      (rassq char undecodify-map))
-	     do (insert (if trans
-			    (car trans)
-			  char)))
+	     do (insert (or (car (rassq char undecodify-map))
+			    char)))
     (decode-coding-string (buffer-string) 'utf-8)))
 
 (provide 'undecodify)
