@@ -62,6 +62,13 @@
 			    char)))
     (decode-coding-string (buffer-string) 'utf-8)))
 
+(defun undecodify-buffer ()
+  "Undecodify the current buffer."
+  (interactive)
+  (let ((string (buffer-string)))
+    (delete-region (point-min) (point-max))
+    (insert (undecodify string))))
+
 (provide 'undecodify)
 
 ;;; undecodify.el ends here
